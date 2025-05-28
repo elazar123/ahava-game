@@ -48,7 +48,7 @@ function showCard(index) {
     
     currentCardIndex = index;
     const cardImage = document.getElementById('card-image');
-    cardImage.src = `../compressed_images/${cardFiles[index]}`;
+    cardImage.src = `../../compressed_images/${cardFiles[index]}`;
     
     // עדכון מצב כפתורי הניווט
     updateNavigationButtons();
