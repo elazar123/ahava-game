@@ -502,8 +502,8 @@ function showCard(card) {
     const frontImage = document.getElementById('card-front-image');
     const backImage = document.getElementById('card-back-image');
     
-    frontImage.src = `קלפי שיח ספר אהבה/${card.frontImage}`;
-    backImage.src = `קלפי שיח ספר אהבה/${card.backImage}`;
+    frontImage.src = `compressed_images/${card.frontImage}`;
+    backImage.src = `compressed_images/${card.backImage}`;
     
     // איפוס מצב הקלף (לא מהופך)
     isCardFlipped = false;
