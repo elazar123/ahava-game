@@ -495,31 +495,27 @@ function showRandomCard() {
 
 // פונקציה להצגת קלף ספציפי
 function showCard(card) {
-    // עדכון שם הקלף
+    console.log('Showing card', card);
+    
+    // איפוס מצב הקלף (לא הפוך)
+    isCardFlipped = false;
+    document.getElementById('current-card').classList.remove('flipped');
+    
+    // עדכון מספר הקלף המוצג
     document.getElementById('card-number').textContent = card.cardName;
     
-    // עדכון תמונות הקלף
+    // עדכון התמונות של הקלף
     const frontImage = document.getElementById('card-front-image');
     const backImage = document.getElementById('card-back-image');
     
     frontImage.src = `compressed_images/${card.frontImage}`;
     backImage.src = `compressed_images/${card.backImage}`;
     
-    // איפוס מצב הקלף (לא מהופך)
-    isCardFlipped = false;
-    const cardElement = document.getElementById('current-card');
-    cardElement.classList.remove('flipped');
+    // שמירת מספר הקלף הנוכחי
+    selectedCardNumber = card.number;
     
-    // אנימציה קטנה של הקלף
-    cardElement.style.animation = 'none';
-    setTimeout(() => {
-        cardElement.style.animation = 'floatCard 3s ease-in-out infinite';
-    }, 10);
-    
-    // עדכון הקלף הנבחר בתפריט אם הוא פתוח
-    if (document.getElementById('side-menu').classList.contains('active')) {
-        highlightSelectedCard(card.number);
-    }
+    // הדגשת הקלף בתפריט
+    highlightSelectedCard(card.number);
 }
 
 // פונקציה להצגת הקלף האקראי הבא
