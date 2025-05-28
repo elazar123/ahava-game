@@ -1,0 +1,1018 @@
+/* הגדרת פונטים */
+@font-face {
+    font-family: 'HebrewFont';
+    src: url('../fonts/hebrew-font.woff2') format('woff2'),
+         url('../fonts/hebrew-font.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* איפוס */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'HebrewFont', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* משתנים גלובליים */
+:root {
+    --primary-color: #6c5ce7;
+    --primary-light: #a29bfe;
+    --primary-dark: #4834d4;
+    --secondary-color: #ff7675;
+    --secondary-light: #fab1a0;
+    --secondary-dark: #d63031;
+    --accent-color: #fdcb6e;
+    --accent-dark: #e17055;
+    --text-color: #2d3436;
+    --text-light: #636e72;
+    --text-white: #dfe6e9;
+    --bg-color: #f5efe3;
+    --bg-light: #f9f5ed;
+    --bg-dark: #e6ded0;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --button-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 15px;
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+    --transition-slow: 0.8s ease;
+}
+
+/* בסיס */
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: #f8f5ee;
+    color: var(--text-color);
+    direction: rtl;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* מיכל מסך מלא */
+.fullscreen-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle, #f8f5ee 0%, #f0ece1 100%);
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.fullscreen-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/pattern.png') repeat;
+    opacity: 0.03;
+    z-index: 1;
+}
+
+.game-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+/* מסך פתיחה */
+.welcome-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 100%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 0;
+}
+
+.welcome-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeInUp 1.2s ease;
+    margin: 0;
+    padding: 0;
+}
+
+.cover-container {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 5%;
+}
+
+.cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform var(--transition-medium);
+}
+
+.welcome-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 40px 0;
+}
+
+.start-button {
+    font-size: 1.6rem;
+    padding: 18px 50px;
+    border-radius: 50px;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    min-width: 250px;
+    max-width: 400px;
+    z-index: 10;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.start-button:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-dark);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.button-icon {
+    font-size: 1.2rem;
+}
+
+/* כפתורים */
+.primary-button, .secondary-button, .nav-button, .game-button, .control-button {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: var(--button-shadow);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.primary-button:hover, .nav-button:hover, .game-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+}
+
+.secondary-button {
+    background-color: var(--text-light);
+}
+
+.secondary-button:hover {
+    background-color: var(--text-color);
+    transform: translateY(-3px);
+}
+
+/* מסך הקדמה */
+.intro-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: var(--bg-light);
+    position: relative;
+    margin: 0;
+}
+
+.intro-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--bg-dark);
+}
+
+.section-title {
+    font-size: 2rem;
+    color: var(--primary-dark);
+}
+
+.intro-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.back-button, #next-intro-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.intro-fullcard-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.intro-card {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    max-height: 80vh;
+    transition: all var(--transition-medium);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.intro-card.active {
+    display: flex;
+    animation: fadeIn 0.5s ease;
+}
+
+.intro-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform var(--transition-medium);
+}
+
+.intro-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.intro-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.intro-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--bg-dark);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.intro-dot.active {
+    background-color: var(--primary-color);
+    transform: scale(1.2);
+}
+
+.start-game-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.start-game-btn {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.start-game-btn:hover {
+    background-color: var(--accent-dark);
+}
+
+/* מסך המשחק */
+.game-screen {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #f8f5ee;
+    margin: 0;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    z-index: 5;
+}
+
+.card-info {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-number {
+    padding: 8px 20px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-radius: 30px;
+    font-size: 1.2rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-number::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(45deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                rgba(255, 255, 255, 0.1) 100%);
+    z-index: 0;
+    transform: translateX(-100%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.game-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.control-button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background-color: var(--text-light);
+}
+
+.control-button:hover {
+    background-color: var(--text-color);
+    transform: translateY(-3px);
+}
+
+.home-button {
+    background-color: var(--secondary-color);
+}
+
+.home-button:hover {
+    background-color: var(--secondary-dark);
+}
+
+.cards-display {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    background-color: transparent;
+}
+
+.card-container {
+    perspective: 1500px;
+    width: 100%;
+    max-width: 80vw;
+    height: 70vh;
+    max-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform var(--transition-medium);
+    transform-style: preserve-3d;
+    perspective: 1500px;
+    background-color: transparent;
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform var(--transition-medium);
+    box-shadow: var(--card-shadow);
+    background-color: transparent;
+    position: relative;
+}
+
+.card-inner::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.6), 
+                0 0 60px 10px rgba(255, 255, 255, 0.3);
+    opacity: 0.6;
+    z-index: -1;
+    animation: pulseGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.4;
+        box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.4), 
+                    0 0 40px 6px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        opacity: 0.7;
+        box-shadow: 0 0 40px 8px rgba(255, 255, 255, 0.7), 
+                    0 0 70px 15px rgba(255, 255, 255, 0.4);
+    }
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    background-color: transparent;
+    border: none;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background-color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.game-simple-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.game-button {
+    padding: 15px 40px;
+    min-width: 180px;
+    font-size: 1.2rem;
+}
+
+.flip-button {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.flip-button:hover {
+    background-color: var(--accent-dark);
+}
+
+.next-button {
+    background-color: var(--secondary-color);
+}
+
+.next-button:hover {
+    background-color: var(--secondary-dark);
+}
+
+/* אלמנט הודעות */
+.message-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-size: 1rem;
+    z-index: 1000;
+    box-shadow: var(--button-shadow);
+    transition: opacity var(--transition-fast);
+    opacity: 0;
+}
+
+/* אנימציות */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes floatCard {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* תגובתיות */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .intro-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .card-container {
+        max-width: 90vw;
+        height: 60vh;
+    }
+    
+    .game-simple-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .game-button {
+        width: 90%;
+    }
+    
+    .start-button {
+        width: 80%;
+        max-width: 300px;
+        padding: 15px 30px;
+        font-size: 1.4rem;
+    }
+
+    .intro-card {
+        max-width: 90%;
+        max-height: 70vh;
+    }
+}
+
+@media (min-width: 1200px) {
+    .game-screen {
+        display: flex !important;
+        flex-direction: row !important;
+        padding: 0 !important;
+        overflow: hidden;
+    }
+    
+    .side-menu {
+        position: fixed;
+        transform: translateX(100%);
+        width: 280px;
+        height: 100vh;
+        z-index: 100;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .side-menu.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .card-container {
+        max-width: 65vw;
+    }
+}
+
+/* מצב מסך מלא */
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: var(--bg-color);
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+
+.fullscreen-active {
+    overflow: hidden;
+}
+
+.fullscreen-active .fullscreen-container {
+    height: 100vh;
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.fullscreen-active .game-wrapper {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.fullscreen-active .card-container {
+    max-width: 85vw;
+    height: 85vh;
+}
+
+.fullscreen-active .intro-card {
+    max-width: 80%;
+    max-height: 80vh;
+}
+
+/* תפריט צדדי */
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--bg-light);
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.side-menu.active {
+    transform: translateX(0);
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+.side-menu-header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-bottom: 1px solid var(--primary-dark);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.side-menu-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.close-menu-button {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.close-menu-button:hover {
+    transform: scale(1.1);
+    color: var(--accent-color);
+}
+
+.card-list-container {
+    flex: 1;
+    overflow-y: auto !important;
+    padding: 0;
+    margin: 0;
+    -webkit-overflow-scrolling: touch;
+    height: calc(100vh - 120px);
+    max-height: 100%;
+    position: relative;
+}
+
+.card-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    width: 100%;
+}
+
+.card-list-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--bg-dark);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: block;
+    width: 100%;
+    text-align: right;
+    user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.card-list-item:active {
+    background-color: var(--primary-dark);
+    color: var(--text-white);
+}
+
+.card-list-item:hover {
+    background-color: var(--primary-light);
+    color: var(--text-white);
+}
+
+.card-list-item.active {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    font-weight: bold;
+}
+
+/* גלילה מותאמת לתפריט */
+.card-list-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.card-list-container::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+.card-list-container::-webkit-scrollbar-thumb {
+    background-color: var(--primary-light);
+    border-radius: 10px;
+}
+
+.card-list-container::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-color);
+}
+
+/* כפתור פתיחת תפריט */
+.menu-toggle {
+    background-color: var(--primary-color);
+}
+
+.menu-toggle:hover {
+    background-color: var(--primary-dark);
+}
+
+/* חיפוש בתפריט */
+.search-container {
+    flex-shrink: 0;
+    padding: 12px 15px;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--bg-dark);
+    position: sticky;
+    top: 56px;
+    z-index: 10;
+}
+
+.search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.card-search-input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--bg-dark);
+    background-color: white;
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    direction: rtl;
+}
+
+.card-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.card-list-item.hidden {
+    display: none;
+}
+
+.no-results-message {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+    border-bottom: 1px solid var(--bg-dark);
+}
+
+/* התאמות למובייל עבור התפריט */
+@media (max-width: 768px) {
+    .search-container {
+        padding: 15px;
+    }
+    
+    .card-search-input {
+        padding: 12px 40px 12px 15px;
+        font-size: 1.1rem;
+    }
+    
+    .search-icon {
+        font-size: 1.1rem;
+    }
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    z-index: 5;
+}
+
+/* התאמות למובייל עבור התפריט */
+@media (max-width: 768px) {
+    .side-menu {
+        width: 85%;
+        max-width: 300px;
+    }
+    
+    .card-list-item {
+        padding: 18px 20px;
+        font-size: 1.1rem;
+    }
+    
+    .side-menu-header {
+        padding: 15px 20px;
+    }
+    
+    .side-menu-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .close-menu-button {
+        font-size: 1.5rem;
+        padding: 8px;
+    }
+}
+
+.card-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    height: 90%;
+    border-radius: var(--border-radius);
+    background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
+    z-index: -1;
+    pointer-events: none;
+} 

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק קלפי אהבה</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- אפקטי יום ולילה -->
+    <div class="day-mode" id="day-mode"></div>
+    <div class="night-mode" id="night-mode"></div>
+    
+    <div class="fullscreen-container">
+        <div class="game-wrapper">
+            <!-- מסך פתיחה -->
+            <div class="welcome-screen" id="welcome-screen">
+                <div class="welcome-content">
+                    <div class="cover-container">
+                        <img src="קלפי שיח ספר אהבה/שער.png" alt="שער המשחק" class="cover-image">
+                    </div>
+                    <div class="welcome-footer">
+                        <button class="primary-button start-button" onclick="startGame()">
+                            <span class="button-icon"><i class="fas fa-play"></i></span>
+                            <span class="button-text"><strong>התחל משחק</strong></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- מסך הקדמה -->
+            <div class="intro-screen" id="intro-screen" style="display: none;">
+                <div class="intro-header">
+                    <h2 class="section-title">הקדמה למשחק</h2>
+                    <div class="intro-controls">
+                        <button class="nav-button back-button" onclick="backToWelcome()">
+                            <i class="fas fa-arrow-right"></i> חזרה
+                        </button>
+                        <button class="nav-button" id="next-intro-button" onclick="nextIntroCard()">
+                            הבא <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="intro-fullcard-container">
+                    <!-- קלפי ההקדמה יוצגו כאן אחד בכל פעם -->
+                    <div class="intro-card active" data-card-index="0">
+                        <img src="קלפי שיח ספר אהבה/2.png" alt="הקדמה 2" class="intro-card-image">
+                    </div>
+                    <div class="intro-card" data-card-index="1" style="display: none;">
+                        <img src="קלפי שיח ספר אהבה/4.png" alt="הקדמה 4" class="intro-card-image">
+                    </div>
+                    <div class="intro-card" data-card-index="2" style="display: none;">
+                        <img src="קלפי שיח ספר אהבה/הקדמה 2.png" alt="הקדמה" class="intro-card-image">
+                    </div>
+                    <div class="intro-card" data-card-index="3" style="display: none;">
+                        <img src="קלפי שיח ספר אהבה/הקדמה 4.png" alt="הקדמה" class="intro-card-image">
+                    </div>
+                </div>
+                
+                <div class="intro-navigation">
+                    <div class="intro-dots">
+                        <span class="intro-dot active" data-index="0"></span>
+                        <span class="intro-dot" data-index="1"></span>
+                        <span class="intro-dot" data-index="2"></span>
+                        <span class="intro-dot" data-index="3"></span>
+                    </div>
+                    <div class="start-game-container" style="display: none;" id="start-game-container">
+                        <button class="primary-button start-game-btn" onclick="showCards()">
+                            <span class="button-icon"><i class="fas fa-gamepad"></i></span>
+                            <span class="button-text"><strong>התחל לשחק</strong></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- מסך המשחק העיקרי -->
+            <div class="game-screen" id="game-screen" style="display: none;">
+                <!-- תפריט צדדי -->
+                <div class="side-menu" id="side-menu">
+                    <div class="side-menu-header">
+                        <h3>בחירת קלף</h3>
+                        <button class="close-menu-button" onclick="toggleSideMenu()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="search-container">
+                        <div class="search-input-wrapper">
+                            <input type="text" id="card-search" class="card-search-input" placeholder="חיפוש קלף...">
+                            <i class="fas fa-search search-icon"></i>
+                        </div>
+                    </div>
+                    <div class="card-list-container">
+                        <ul class="card-list" id="card-list">
+                            <!-- רשימת הקלפים תיווצר דינמית בקוד JavaScript -->
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- פאנל היסטוריה -->
+                <div class="history-panel" id="history-panel">
+                    <div class="history-header">
+                        <h3 class="history-title">היסטוריית קלפים</h3>
+                        <button class="close-history" onclick="toggleHistoryPanel()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="history-container" id="history-container">
+                        <!-- תוכן ההיסטוריה יוצג כאן דינמית -->
+                    </div>
+                </div>
+                
+                <div class="main-content">
+                    <div class="game-header">
+                        <div class="card-info">
+                            <span id="card-number" class="card-number">קלף 1</span>
+                        </div>
+                        <div class="game-controls">
+                            <button class="control-button history-toggle" onclick="toggleHistoryPanel()">
+                                <i class="fas fa-history"></i>
+                            </button>
+                            <button class="control-button share-button" onclick="shareCard()">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                            <button class="control-button menu-toggle" onclick="toggleSideMenu()">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <button class="control-button home-button" onclick="backToWelcome()">
+                                <i class="fas fa-home"></i>
+                            </button>
+                            <button class="control-button fullscreen-toggle" onclick="toggleFullscreen()">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="cards-display">
+                        <div class="card-container">
+                            <div class="card" id="current-card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <img id="card-front-image" src="" alt="קלף" class="card-image">
+                                    </div>
+                                    <div class="card-back">
+                                        <img id="card-back-image" src="" alt="גב הקלף" class="card-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-simple-controls">
+                        <button class="game-button flip-button" onclick="flipCard()">
+                            <i class="fas fa-sync-alt"></i> הפוך צד
+                        </button>
+                        <button class="game-button next-button" onclick="nextRandomCard()">
+                            <i class="fas fa-random"></i> קלף הבא
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- אלמנט להודעות -->
+    <div id="message-popup" class="message-popup" style="display: none;"></div>
+    
+    <!-- שכבת כיסוי לתפריט -->
+    <div id="menu-overlay" class="menu-overlay" onclick="toggleSideMenu()"></div>
+    
+    <script src="js/script-updated.js"></script>
+</body>
+</html> 

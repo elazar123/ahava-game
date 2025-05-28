@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>משחק קלפי אהבה</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-container">
+            <div class="welcome-screen" id="welcome-screen">
+                <img src="../קלפי שיח ספר אהבה/שער.png" alt="שער המשחק" class="cover-image">
+                <h1>ברוכים הבאים למשחק קלפי האהבה</h1>
+                <p>משחק אינטראקטיבי של קלפי שיח להעמקת הקשר והאהבה</p>
+                <button class="start-button" onclick="startGame()">התחל משחק</button>
+            </div>
+            
+            <div class="intro-screen" id="intro-screen" style="display: none;">
+                <h2>הקדמה</h2>
+                <div class="intro-cards">
+                    <img src="../קלפי שיח ספר אהבה/הקדמה 2.png" alt="הקדמה 2" class="intro-card">
+                    <img src="../קלפי שיח ספר אהבה/הקדמה 4.png" alt="הקדמה 4" class="intro-card">
+                </div>
+                <button class="continue-button" onclick="showCards()">המשך למשחק</button>
+            </div>
+            
+            <div class="game-screen" id="game-screen" style="display: none;">
+                <div class="card-container">
+                    <div class="card" id="current-card">
+                        <img id="card-image" src="" alt="קלף" class="card-image">
+                    </div>
+                    <div class="card-navigation">
+                        <button id="prev-button" onclick="prevCard()">הקודם</button>
+                        <button id="next-button" onclick="nextCard()">הבא</button>
+                        <button id="random-button" onclick="randomCard()">קלף אקראי</button>
+                        <button id="favorite-button" onclick="toggleFavorite()">🤍 הוסף למועדפים</button>
+                        <button id="show-favorite-button" onclick="showRandomFavorite()">❤️ קלף מועדף אקראי</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- אלמנט להודעות -->
+    <div id="message-popup" class="message-popup" style="display: none;"></div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html> 
